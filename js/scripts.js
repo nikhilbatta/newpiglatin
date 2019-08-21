@@ -1,26 +1,74 @@
 $(document).ready(function(){
   $("#formOne").submit(function(event){
     event.preventDefault();
-    // var arr = ["a","e","i","o","u"]
-    var arr1 =[]
     var userInput = $(".inputOne").val();
-    var pusher = arr1.push(userInput)
-    arr1.forEach(function(char){
-    var matcher = char.charAt(0).match(/[aeiou]/gi)
-    var consonantMatcher = char.charAt(0,1).match(/[b-df-hj-np-tv-z]/gi)
-    if (matcher){
-    // var changed =  userInput.toString();
-    var changed1 = userInput.concat("way")
-    $("#formOne").append("<li>" + changed1 + "</li>")
-    }
-    else if (consonantMatcher){
+    var startOfLogic = sentenceChecker(userInput);
+    $("#formOne").append("<li>" + startOfLogic+ "</li>")
 
-      alert("WOW")
+  });
+});
 
-      var consonant = userInput.concat("ay");
-      $("#formOne").append("<li>" + consonant + "</li>")
-    }
-   });
+// var userInput = $(".inputOne").val();
+
+function sentenceChecker(inputString){
+  var words1= "";
+  console.log(words1)
+  var splitter = inputString.split(" ")
+  splitter.forEach(function(split){
+    words1 = inputString + " " + wordChecker(inputString)
   });
 
-});
+   return words1;
+};
+
+function wordChecker(word){
+  // var word = $(".inputOne").val();
+  var firstPart = "";
+  var secondPart = "";
+  var ending = "way"
+  // var matcher1 = (/^[a-zA-Z]+$/).test(word)
+  for(var i=0; i<word.length; i++){
+    var matcher = word[i].match(/[aeiou]/i);
+    var matcher1 = (/^[a-zA-Z]+$/).test(word[i])
+    if (matcher1 === false){
+      console.log("didnt run")
+    }
+  else if (matcher === null){
+      firstPart = firstPart.concat(word[i]);
+      ending = "ay"
+      // console.log(firstPart + " Is the first part");
+    }
+    else {
+      secondPart = word.substr(i, word.length);
+      break;
+      // console.log(secondPart + " Is the second part")
+
+    }
+  };
+  console.log(secondPart + firstPart + ending);
+
+};
+
+//
+// function characterChecker(word){
+//   // console.log(word + " Is the word");
+//   // var userInput = $(".inputOne").val();
+//   var matcher1 = (/^[a-zA-Z]+$/).test(word)
+//   if (matcher1 === false){
+//     // console.log("didnt work")
+//
+//   }
+//   else{
+//
+//     sentenceChecker(word)
+//   };
+//   // wordChecker(userInput);
+//   // wordChecker(userInput)
+// }
+
+
+// function adder(number1, number2) {
+  //   return number1 + number2;
+  // }
+  //
+  // var result = adder(1,2);
