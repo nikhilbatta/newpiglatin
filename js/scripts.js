@@ -15,7 +15,7 @@ function sentenceChecker(inputString){
   console.log(words1)
   var splitter = inputString.split(" ")
   splitter.forEach(function(split){
-    words1 = inputString + " " + wordChecker(inputString)
+    words1 = inputString + " " + wordChecker(split)
   });
 
    return words1;
@@ -27,12 +27,14 @@ function wordChecker(word){
   var secondPart = "";
   var ending = "way"
   // var matcher1 = (/^[a-zA-Z]+$/).test(word)
+  var matcher1 = (/^[a-zA-Z]+$/).test(word)
+  if (matcher1 === false){
+    console.log("didnt run")
+    return word;
+  }
   for(var i=0; i<word.length; i++){
     var matcher = word[i].match(/[aeiou]/i);
-    var matcher1 = (/^[a-zA-Z]+$/).test(word[i])
-    if (matcher1 === false){
-      console.log("didnt run")
-    }
+
   else if (matcher === null){
       firstPart = firstPart.concat(word[i]);
       ending = "ay"
